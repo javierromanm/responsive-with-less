@@ -1,0 +1,35 @@
+//Declaración de variables
+	@sm: 576px;
+	@md: 768px;
+	@lg: 992px;
+	@xl: 1200px;	
+	@xs: 100%;
+	@g: 14;
+
+//Funciones
+	.grid(@n, @i:1) when (@i <= @n) {
+		.col-@{i} {
+			width: percentage(@i / @n);
+		}
+		.grid(@n, @i+1);
+	}
+
+	.grid(@g);
+
+	.view(@vw, @vn) {
+		@media screen and (min-width: @vw){
+			.grid(@n, @i:1) when (@i <= @n) {
+				.col-@{vn}-@{i} {
+					width: percentage(@i / @n);
+				}
+				.grid(@n, @i+1);
+			}
+			.grid(@g);
+		}
+	}
+	.view(@sm, sm);
+	.view(@md, md);
+	.view(@lg, lg);
+	.view(@xl, xl);
+	.view(@xs, xs);
+	
